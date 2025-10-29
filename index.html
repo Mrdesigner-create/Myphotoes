@@ -13,6 +13,19 @@
       color: #333;
     }
 
+    .search-box {
+      margin: 20px auto;
+      text-align: center;
+    }
+
+    .search-box input {
+      width: 60%;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -37,6 +50,12 @@
 </head>
 <body>
   <h1>My Photos</h1>
+
+  <!-- 🔍 Search box added -->
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search photo by name...">
+  </div>
+
   <div class="photo-grid">
     <a href="Mrlaxmeshwar32.jpg" target="_blank">
       <img src="Mrlaxmeshwar32.jpg" alt="Mrlaxmeshwar Photo 1">
@@ -60,10 +79,26 @@
       <img src="Beautiful-Rose.jpg" alt="Beautiful-Rose">
     </a>
   </div>
+
+  <script>
+    // 🔎 Search functionality
+    const searchInput = document.getElementById('searchInput');
+    const photoLinks = document.querySelectorAll('.photo-grid a');
+
+    searchInput.addEventListener('input', function() {
+      const searchValue = this.value.toLowerCase();
+
+      photoLinks.forEach(link => {
+        const img = link.querySelector('img');
+        const altText = img.alt.toLowerCase();
+
+        if (altText.includes(searchValue)) {
+          link.style.display = '';
+        } else {
+          link.style.display = 'none';
+        }
+      });
+    });
+  </script>
 </body>
 </html>
-
-
-
-
-
